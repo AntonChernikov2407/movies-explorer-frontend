@@ -1,0 +1,139 @@
+.popup {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.3s ease-in-out;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.popup_opened {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup__overlay {
+  width: inherit;
+  height: inherit;
+  position: inherit;
+  cursor: pointer;
+  background-color: #000;
+  opacity: 0.3;
+}
+
+.popup__container {
+  width: 470px;
+  height: max-content;
+  border-radius: 10px;
+  background-color: #202020;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 80px 30px 50px;
+  box-sizing: border-box;
+}
+
+.popup__close-button{
+  width: 32px;
+  height: 32px;
+  background-color: transparent;
+  background-image: url('../../images/logo/nav-close-button.svg');
+  position: absolute;
+  top: 13px;
+  right: 13px;
+}
+
+.edit-form {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.edit-form__title {
+  color: #FFF;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.2;
+  margin: 0 0 80px;
+  width: 100%;
+}
+
+.edit-form__input-container {
+  width: 100%;
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 1px solid #424242;
+  margin: 0 0 17px;
+  padding: 0;
+}
+
+.edit-form__input-container:last-of-type {
+  border-bottom: none;
+  margin: 0;
+}
+
+.edit-form__input-container::placeholder {
+  color: #FFF;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.27;
+  max-height: 14px;
+}
+
+.edit-form__input {
+  width: 100%;
+  height: 14px;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: none;
+  color: #FFF;
+  font-family: inherit;
+  font-size: 11px;
+  line-height: 1.27;
+  background-color: transparent;
+}
+
+.edit-form__input:focus {
+  border-bottom: 1px solid #424242;
+}
+
+.edit-form__submit-button {
+  width: 250px;
+  height: 40px;
+  border-radius: 5px;
+  background-color: #3DDC84;
+  text-align: center;
+  color: #000;
+  font-size: 13px;
+  line-height: 1.23;
+  font-weight: 500;
+  margin: 60px 0 0;
+  align-self: center;
+}
+
+@media screen and (max-width: 600px) {
+  .popup__container {
+    width: 300px;
+  }
+
+  .popup__container {
+    padding: 60px 15px 40px;
+  }
+
+  .edit-form__title {
+    font-size: 18px;
+    line-height: 1.2;
+    margin: 0 0 60px;
+  }
+}
