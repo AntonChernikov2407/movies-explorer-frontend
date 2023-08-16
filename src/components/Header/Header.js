@@ -7,7 +7,7 @@ function Header(props) {
   const location = useLocation();
   const navigate = useNavigate();
   const [width, setWidth] = useState(window.innerWidth);
-  const loggedIn = true; // Менять состояние для демострации
+  const loggedIn = false; // Менять для отображения разных состояний хедера(автроризованного и неавторизованного)
 
   useEffect(() => {
     const handleResize = () => {

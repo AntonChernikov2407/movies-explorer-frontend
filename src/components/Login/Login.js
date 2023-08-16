@@ -12,14 +12,30 @@ function Login() {
         <form className="auth-form">
           <fieldset className="auth-form__input-container">
             <label className="auth-form__label">E-mail</label>
-            <input className="auth-form__input" type="email" name="email" />
+            <input
+              className="auth-form__input"
+              type="email"
+              name="email"
+              required
+              placeholder="Введите ваш e-mail"
+              minLength="2"
+              maxLength="40"
+            />
           </fieldset>
           <fieldset className="auth-form__input-container">
             <label className="auth-form__label">Пароль</label>
-            <input className="auth-form__input" type="password" name="password" />
+            <input
+              className="auth-form__input"
+              type="password"
+              name="password"
+              required
+              placeholder="Введите ваш пароль"
+              minLength="8"
+              maxLength="20"
+            />
           </fieldset>
           <p className="auth-form__error-text"></p>
-          <button className="button auth-form__submit-button auth-form__submit-button_login">Зарегистрироваться</button>
+          <button className="button auth-form__submit-button auth-form__submit-button_login">Войти</button>
           <div className="auth-form__link-wrapper">
             <p className="auth-form__question">Ещё не зарегистрированы?</p>
             <Link to="/signup" className="link auth-form__login-link">Регистрация</Link>

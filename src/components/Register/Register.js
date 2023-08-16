@@ -12,15 +12,39 @@ function Register() {
         <form className="auth-form">
           <fieldset className="auth-form__input-container">
             <label className="auth-form__label">Имя</label>
-            <input className="auth-form__input" type="text" name="name" />
+            <input
+              className="auth-form__input"
+              type="text"
+              name="name"
+              required
+              placeholder="Введите вашe имя"
+              minLength="2"
+              maxLength="40"
+            />
           </fieldset>
           <fieldset className="auth-form__input-container">
             <label className="auth-form__label">E-mail</label>
-            <input className="auth-form__input" type="email" name="email" />
+            <input
+              className="auth-form__input"
+              type="email"
+              name="email"
+              required
+              placeholder="Введите ваш e-mail"
+              minLength="2"
+              maxLength="40"
+            />
           </fieldset>
           <fieldset className="auth-form__input-container">
             <label className="auth-form__label">Пароль</label>
-            <input className="auth-form__input" type="password" name="password" />
+            <input
+              className="auth-form__input"
+              type="password"
+              name="password"
+              required
+              placeholder="Введите ваш пароль"
+              minLength="8"
+              maxLength="20"
+            />
           </fieldset>
           <p className="auth-form__error-text">Что-то пошло не так...</p>
           <button className="button auth-form__submit-button">Зарегистрироваться</button>

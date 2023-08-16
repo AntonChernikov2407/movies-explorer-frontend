@@ -13,6 +13,10 @@
   padding: 50px 0 80px;
 }
 
+.show-more_saved {
+  padding: 50px 0 128px;
+}
+
 .show-more__button {
   width: 320px;
   height: 36px;
@@ -27,11 +31,15 @@
   line-height: 1.33;
 }
 
-@media screen and (min-width: 768px) and (max-width: 1023px) {
+@media screen and (min-width: 767px) and (max-width: 1023px) {
   .movies-list {
     padding: 80px 30px 10px;
     grid-template-columns: repeat(2, 1fr);
     gap: 45px 30px;
+  }
+
+  .show-more_saved {
+    padding: 50px 0 80px;
   }
 }
 
@@ -46,5 +54,9 @@
 
   .show-more__button {
     width: 240px;
+  }
+
+  .show-more_saved {
+    padding: 50px 0 57px;
   }
 }

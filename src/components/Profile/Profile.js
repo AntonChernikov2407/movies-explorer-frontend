@@ -3,6 +3,7 @@ import Navigation from '../Navigation/Navigation.js';
 import Header from '../Header/Header.js';
 import EditProfilePopup from '../EditProfilePopup/EditProfilePopup.js';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Profile() {
 
@@ -11,6 +12,7 @@ function Profile() {
     email: 'pochta@yandex.ru'
   }
 
+  const navigate = useNavigate();
   const [isNavigationOpen, setIsNavigationOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
 
@@ -28,6 +30,10 @@ function Profile() {
 
   function closeEditProfilePopup() {
     setIsEditProfilePopupOpen(false);
+  }
+
+  function replaceToMain() {
+    navigate('/', {replace: true});
   }
 
   return (
@@ -52,7 +58,7 @@ function Profile() {
           </div>
           <div className="profile__buttons">
             <button className="button profile__button profile__button_edit-profile" onClick={openEditProfilePopup}>Редактировать</button>
-            <button className="button profile__button profile__button_logout">Выйти из аккаунта</button>
+            <button className="button profile__button profile__button_logout" onClick={replaceToMain}>Выйти из аккаунта</button>
           </div>
         </div>
       </main>

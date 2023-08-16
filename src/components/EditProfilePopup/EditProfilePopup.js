@@ -30,6 +30,8 @@ function EditProfilePopup({ isOpen, onClose }) {
               placeholder="Имя"
               value={name || ""}
               onChange={handleInputChange}
+              minLength="2"
+              maxLength="40"
             />
           </fieldset>
           <fieldset className="edit-form__input-container">
@@ -40,6 +42,8 @@ function EditProfilePopup({ isOpen, onClose }) {
               placeholder="E-mail"
               value={email || ""}
               onChange={handleInputChange}
+              minLength="2"
+              maxLength="40"
             />
           </fieldset>
           <button className="button edit-form__submit-button" type="submit">Сохранить</button>
