@@ -1,0 +1,13 @@
+.main {
+  width: inherit;
+  height: inherit;
+  flex: 1 0 auto;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 1023px) {
+  .main {
+    margin: 0;
+  }
+}

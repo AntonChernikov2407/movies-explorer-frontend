@@ -1,0 +1,131 @@
+.navigation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100vh;
+  z-index: 2;
+  display: flex;
+  visibility: hidden;
+  transition: visibility 0.1s linear;
+}
+
+.navigation_opened {
+  visibility: visible;
+}
+
+.navigation__overlay {
+  position: relative;
+  width: 100%;
+  min-height: inherit;
+  background-color: #000;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.navigation__overlay_opened {
+  opacity: 0.3;
+}
+
+.navigation__content {
+  width: 0;
+  min-height: 100vh;
+  background-color: #202020;
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  transition: width 0.2s ease;
+}
+
+.navigation__content_opened {
+  width: 520px;
+}
+
+.navigation__close-button {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background-color: transparent;
+  background-image: url('../../images/logo/nav-close-button.svg');
+  padding: 0;
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  cursor: pointer;
+}
+
+.navigation__links {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: max-content;
+  height: 128px;
+  margin: 159px 0 0;
+}
+
+.navigation__link-wrapper {
+  width: max-content;
+  height: 28px;
+  box-sizing: border-box;
+}
+
+.navigation__link-wrapper_active {
+  border-bottom: 2px solid #FFF;
+}
+
+.navigation__link {
+  color: #FFF;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.22;
+}
+
+.navigation__profile-button {
+  background-color: #313131;
+  border-radius: 20px;
+  width: 100px;
+  height: 32px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.14;
+  color: #fff;
+  margin: 0 0 90px;
+}
+
+@media screen and (max-width: 767px) {
+  .navigation__content_opened {
+    width: 400px;
+  }
+
+  .navigation__links {
+    margin: 144px 0 0;
+    height: 123px;
+  }
+
+  .navigation__link-wrapper {
+    height: 31px;
+  }
+
+  .navigation__profile-button {
+    margin: 0 0 46px;
+  }
+
+  .navigation__close-button {
+    top: 13px;
+    right: 13px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .navigation__content_opened {
+    width: 100%;
+  }
+}

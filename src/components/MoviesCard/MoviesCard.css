@@ -1,0 +1,127 @@
+.movie {
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.movie__save-button {
+  width: 72px;
+  height: 21px;
+  border-radius: 30px;
+  background-color: #313131;
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  color: #fff;
+  font-size: 10px;
+  line-height: 0.9;
+  visibility: hidden;
+}
+
+.movie:hover .movie__save-button, 
+.movie:hover .movie__button_remove {
+  visibility: visible;
+}
+
+.movie__button {
+  width: 21px;
+  height: 21px;
+  border-radius: 50%;
+  background-position: center;
+  background-color: transparent;
+  position: absolute;
+  top: 14px;
+  right: 14px;
+}
+
+.movie__button_saved {
+  background-image: url('../../images/logo/saved.svg');
+}
+
+.movie__button_remove {
+  background-image: url('../../images/logo/movie-remove-button.svg');
+  visibility: hidden;
+}
+
+.movie__image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 6px;
+  object-position: center;
+  object-fit: cover;
+}
+
+.movie__description {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 14px 0;
+  box-sizing: border-box;
+}
+
+.movie__name {
+  width: 74%;
+  height: 32px;
+  color: #FFF;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.23;
+  margin: 0;
+}
+
+.movie__duration {
+  width: 52px;
+  height: 18px;
+  border-radius: 3px;
+  background-color: #2F2F2F;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #8B8B8B;
+  font-size: 11px;
+  line-height: 0.9;
+}
+
+@media screen and (min-width: 767px) and (max-width: 1023px) {
+  .movie__description {
+    padding: 25px 0 0;
+  }
+
+  .movie__name {
+    height: 16px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .movie{
+    min-width: 250px;
+  }
+
+  .movie__description {
+    padding: 16px 0 0;
+  }
+
+  .movie__name {
+    width: 80%;
+    height: 15px;
+    font-size: 12px;
+    line-height: 1.25;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .movie__save-button,
+  .movie__button_remove {
+    visibility: visible;
+  }
+
+  .movie__button {
+    top: 10px;
+    right: 10px;
+  }
+}
