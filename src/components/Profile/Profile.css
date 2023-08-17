@@ -5,11 +5,10 @@
 
 .profile__content-wrapper {
   width: 410px;
-  min-height: calc(100vh - 74px);
+  height: max-content;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   box-sizing: border-box;
   padding: 74px 0 70px;
 }
@@ -75,7 +74,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  flex: 0 0 auto;
+  margin: 220px 0 0;
 }
 
 .profile__button {
@@ -104,6 +103,10 @@
   .profile__info-container {
     margin: 96px 0 0;
   }
+
+  .profile__buttons {
+    margin: 210px 0 0;
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -118,6 +121,7 @@
 
   .profile__buttons {
     height: 46px;
+    margin: 379px 0 0;
   }
 
   .profile__button {
