@@ -18,7 +18,7 @@ function Movies(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [noMatch, setNoMatch] =useState(false);
   const [isChecked, setIsChecked] = useState(JSON.parse(localStorage.getItem('isChecked')));
-  const [request, setRequest] = useState(localStorage.getItem('value').toLowerCase());
+  const [request, setRequest] = useState(localStorage.getItem('value'));
   const [isFirstRequest, setIsFirstRequest] = useState(JSON.parse(localStorage.getItem('first')));
   const [isError, setIsError] = useState(false);
 
@@ -75,7 +75,7 @@ function Movies(props) {
 
   useEffect(() => {
     if (request) {
-      const filtered = FilterMovies(movies, isChecked, request);
+      const filtered = FilterMovies(movies, isChecked, request.toLowerCase());
       if (filtered.length > 0) {
         setNoMatch(false);
         setFilteredMovies(filtered);
