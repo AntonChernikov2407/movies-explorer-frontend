@@ -120,6 +120,7 @@ function App() {
       .then((data) => {
         if (data.token) {
           localStorage.setItem('jwt', data.token);
+          setLocalStorage();
           setLoggedIn(true);
           navigate('/movies', {replace: true});
           setLoginErrCode('');
@@ -145,12 +146,16 @@ function App() {
 
   function onSignOut() {
     localStorage.removeItem('jwt');
+    setLocalStorage();
+    navigate('/', {replace: true});
+    setLoggedIn(false);
+  }
+
+  function setLocalStorage() {
     localStorage.setItem('first', JSON.stringify(true));
     localStorage.setItem('value', '');
     localStorage.setItem('isChecked', JSON.stringify(false));
     localStorage.setItem('movies', JSON.stringify([]));
-    navigate('/', {replace: true});
-    setLoggedIn(false);
   }
 
   function openNavigation() {
