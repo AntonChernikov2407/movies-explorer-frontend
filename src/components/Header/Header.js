@@ -7,16 +7,14 @@ function Header(props) {
   const location = useLocation();
   const navigate = useNavigate();
   const [width, setWidth] = useState(window.innerWidth);
-  const loggedIn = false; // Менять для отображения разных состояний хедера(автроризованного и неавторизованного)
 
   useEffect(() => {
     const handleResize = () => {
       setWidth(window.innerWidth);
     }
-    if (width >= 1024) {props.onClose()};
+    if (width >= 1024) {handleClose()};
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [width])
 
   function replaceToProfile() {
@@ -27,10 +25,18 @@ function Header(props) {
     navigate('/signin', {replace: true});
   }
 
+  function handleClose() {
+    props.onClose();
+  }
+
+  function handleOpen() {
+    props.onOpen()
+  }
+
   function checkWidth() {
     if (width < 1024) {
       return(
-        <button className="button header__nav-open-button" onClick={props.onOpen} />
+        <button className="button header__nav-open-button" onClick={handleOpen} />
       )
     } else {
       return(
@@ -63,7 +69,7 @@ function Header(props) {
       <div className="header__logo-container">
         <Link to="/" className="link logo" />
       </div>
-      {loggedIn ? checkWidth() : returnMark()}
+      {props.loggedIn ? checkWidth() : returnMark()}
     </header>
   );
 }

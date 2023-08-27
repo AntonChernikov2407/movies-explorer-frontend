@@ -5,29 +5,62 @@ import SearchForm from '../SearchForm/SearchForm.js';
 import Preloader from '../Preloader/Preloader.js';
 import MoviesCardList from '../MoviesCardList/MoviesCardList.js';
 import Footer from '../Footer/Footer.js';
-import { useState } from 'react';
+import FilterMovies from '../../utils/FilterMovies.js';
+import { useState, useEffect } from 'react';
 
-function SavedMovies() {
+function SavedMovies(props) {
 
-  const isLoading = false;
+  const [noMatch, setNoMatch] =useState(false);
+  const [isChecked, setIsChecked] = useState(false);
+  const [request, setRequest] = useState('');
+  const [filteredMovies, setFilteredMovies] = useState([]);
+  const savedMovies = props.savedMovies;
 
-  const [isNavigationOpen, setIsNavigationOpen] = useState(false);
+  useEffect(() => {
+    props.getSavedMovies();
+  }, []);
 
-  function openNavigation() {
-    setIsNavigationOpen(true);
+  useEffect(() => {
+    const filtered = FilterMovies(savedMovies, isChecked, request);
+    if (filtered.length > 0) {
+      setNoMatch(false);
+      setFilteredMovies(filtered);
+    } else setNoMatch(true);
+  }, [isChecked, request, savedMovies])
+
+  function changeCheckboxState(state) {
+    setIsChecked(state)
   }
 
-  function closeNavigation() {
-    setIsNavigationOpen(false);
+  function handleSubmit(value) {
+    setRequest(value.toLowerCase());
+  }
+
+  function returnContent() {
+    if (props.isLoading) return(<Preloader />)
+    else if (noMatch) {
+      return(
+        <div className="no-match">
+          <p className="no-match__text">
+            {!props.isError ? "Ничего не найдено" : "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз."}
+          </p>
+        </div>
+      )
+    }
+    else return(<MoviesCardList 
+        moviesArray={filteredMovies} 
+        request={request} 
+        onDelete={props.onDelete}
+      />)
   }
 
   return (
     <>
-      <Navigation isOpen={isNavigationOpen} onClose={closeNavigation} />
-      <Header isOpen={isNavigationOpen} onOpen={openNavigation} onClose={closeNavigation} />
+      <Navigation isOpen={props.isOpen} onClose={props.onClose} />
+      <Header isOpen={props.isOpen} onOpen={props.onOpen} onClose={props.onClose} loggedIn={props.loggedIn} />
       <main className="saved-movies">
-        <SearchForm />
-        {isLoading ? <Preloader /> : <MoviesCardList />}
+        <SearchForm onSubmit={handleSubmit} onChange={changeCheckboxState} />
+        {returnContent()}
       </main>
       <Footer />
     </>

@@ -35,6 +35,15 @@
   padding: 0 19px 0;
 }
 
+
+.form__input_type_error {
+  border: 1px solid #EE3465;
+}
+
+.form__input_type_error:focus {
+  border: 1px solid #EE3465;
+}
+
 .search-form__submit-button {
   min-width: 44px;
   height: 44px;

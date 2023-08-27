@@ -1,9 +1,10 @@
 .saved-movies {
-  width: inherit;
+  width: 100%;
   height: inherit;
   flex: 1 0 auto;
   max-width: 1280px;
   margin: 0 auto;
+  box-sizing: border-box;
 }
 
 @media screen and (max-width: 1023px) {

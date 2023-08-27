@@ -7,14 +7,23 @@
   gap: 41px 30px;
 }
 
+.movie-list_saved {
+  padding-bottom: 224px;
+}
+
 .show-more {
   display: flex;
   justify-content: center;
   padding: 50px 0 80px;
+  visibility: hidden;
 }
 
 .show-more_saved {
   padding: 50px 0 128px;
+}
+
+.show-more_visible {
+  visibility: visible;
 }
 
 .show-more__button {
@@ -38,6 +47,10 @@
     gap: 45px 30px;
   }
 
+  .movie-list_saved {
+    padding-bottom: 175px;
+  }
+
   .show-more_saved {
     padding: 50px 0 80px;
   }
@@ -50,6 +63,10 @@
     gap: 36px 0;
     max-width: 450px;
     margin: 0 auto;
+  }
+
+  .movie-list_saved {
+    padding-bottom: 150px;
   }
 
   .show-more__button {
