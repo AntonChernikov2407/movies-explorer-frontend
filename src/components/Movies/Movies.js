@@ -21,21 +21,15 @@ function Movies(props) {
   const [request, setRequest] = useState(localStorage.getItem('value'));
   const [isFirstRequest, setIsFirstRequest] = useState(JSON.parse(localStorage.getItem('first')));
   const [isError, setIsError] = useState(false);
+  const savedMovies = props.savedMovies;
 
   useEffect(() => {
-    const token = localStorage.getItem('jwt');
-    setIsLoading(true);
-    Api.getMovies(token)
-      .then((data) => {
-        const result = moviesData.map((movie) => ({
-          ...movie,
-          saved: data.some((m) => m.movieId === movie.movieId)
-        }));
-        setMovies(result);
-      })
-      .catch(err => console.log(err))
-      .finally(() => setIsLoading(false));
-  }, [moviesData])
+    const result = moviesData.map((movie) => ({
+      ...movie,
+      saved: savedMovies.some((m) => m.movieId === movie.movieId)
+    }));
+    setMovies(result);
+  }, [moviesData, savedMovies])
 
   function getAllMovies() {
     if (isFirstRequest) {
@@ -108,13 +102,20 @@ function Movies(props) {
         request={request} 
         onSave={props.onSave}
         onDelete={props.onDelete}
+        width={props.width}
       />)
   }
 
   return (
     <>
       <Navigation isOpen={props.isOpen} onClose={props.onClose} />
-      <Header isOpen={props.isOpen} onOpen={props.onOpen} onClose={props.onClose} loggedIn={props.loggedIn} />
+      <Header
+        isOpen={props.isOpen}
+        onOpen={props.onOpen}
+        onClose={props.onClose}
+        loggedIn={props.loggedIn}
+        width={props.width}
+      />
       <main className="movies">
         <SearchForm onSubmit={handleSubmit} onChange={changeCheckboxState} />
         {returnContent()}

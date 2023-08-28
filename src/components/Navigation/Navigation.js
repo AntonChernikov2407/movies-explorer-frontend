@@ -8,14 +8,16 @@ function Navigation(props) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const close = (evt) => {
-      if (evt.key === 'Escape') {
-        props.onClose();
+    if (props.isOpen) {
+      const close = (evt) => {
+        if (evt.key === 'Escape') {
+          props.onClose();
+        }
       }
-    }
-    window.addEventListener('keydown', close)
-    return () => window.removeEventListener('keydown', close)
-  }, [])
+      window.addEventListener('keydown', close)
+      return () => window.removeEventListener('keydown', close)
+    } return;
+  }, [props.isOpen])
 
   function replaceToProfile() {
     navigate('/profile', {replace: true});

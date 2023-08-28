@@ -6,7 +6,7 @@ import { useState, useEffect, memo } from 'react';
 const MoviesCardList = memo((props) => {
 
   const location = useLocation();
-  const [width, setWidth] = useState(window.innerWidth);
+  const width = props.width;
   const initMovies = () => {
     if (width >= 1024) return 12;
     else if (width < 1024 && width >= 768) return 8;
@@ -18,12 +18,7 @@ const MoviesCardList = memo((props) => {
   const request = props.request;
 
   useEffect(() => {
-    const handleResize = () => {
-      setWidth(window.innerWidth);
-    }
     visibleMovies < initMovies() && setVisibleMovies(initMovies());
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
   }, [width])
 
   useEffect(() => {

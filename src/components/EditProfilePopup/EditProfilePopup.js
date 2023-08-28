@@ -28,14 +28,16 @@ function EditProfilePopup({ isOpen, onClose, onSubmit, errorCode }) {
   }, [currentUser, isOpen]);
 
   useEffect(() => {
-    const close = (evt) => {
-      if (evt.key === 'Escape') {
-        onClose();
+    if (isOpen) {
+      const close = (evt) => {
+        if (evt.key === 'Escape') {
+          onClose();
+        }
       }
-    }
-    window.addEventListener('keydown', close)
-    return () => window.removeEventListener('keydown', close)
-  }, [])
+      window.addEventListener('keydown', close)
+      return () => window.removeEventListener('keydown', close)
+    } return;
+  }, [isOpen])
 
   function handleInputChange({name, value}) {
     name === 'name' ? setName(value) : setEmail(value);
@@ -55,6 +57,7 @@ function EditProfilePopup({ isOpen, onClose, onSubmit, errorCode }) {
   function handleSubmit(evt) {
     evt.preventDefault();
     onSubmit(name, email);
+    setIsDisabled(true);
   }
 
   return(

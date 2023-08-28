@@ -1,20 +1,15 @@
 import './Header.css';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 function Header(props) {
 
   const location = useLocation();
   const navigate = useNavigate();
-  const [width, setWidth] = useState(window.innerWidth);
+  const width = props.width;
 
   useEffect(() => {
-    const handleResize = () => {
-      setWidth(window.innerWidth);
-    }
     if (width >= 1024) {handleClose()};
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
   }, [width])
 
   function replaceToProfile() {

@@ -8,7 +8,7 @@ import Login from '../Login/Login.js';
 import NotFound from '../NotFound/NotFound.js';
 import ProtectedRouteElement from '../ProtectedRoute/ProtectedRoute.js';
 import * as Api from '../../utils/MainApi.js';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext.js';
 
@@ -16,7 +16,8 @@ function App() {
 
   const token = localStorage.getItem('jwt');
   const navigate = useNavigate();
-  const [savedMovies, setSavedMovies] = useState([]);
+  const location = useLocation();
+  const [savedMovies, setSavedMovies] = useState(JSON.parse(localStorage.getItem('savedMovies')));
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [isNavigationOpen, setIsNavigationOpen] = useState(false);
@@ -27,17 +28,21 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [text, setText] = useState('');
+  const [width, setWidth] = useState(window.innerWidth);
+  const currentLocation = location.pathname;
 
   useEffect(() => {
     if (token) {
       Api.getUserInfo(token)
-        .then(info => setCurrentUser(info))
+        .then(info => {
+          setCurrentUser(info);
+          navigate(currentLocation, {replace: true});
+          setLoggedIn(true);
+        })
         .catch(err => console.log(err));
-      navigate('/movies', {replace: true});
-      setLoggedIn(true);
     }
     return;
-  }, [loggedIn])
+  }, [token])
 
   function getSavedMovies() {
     setIsLoading(true);
@@ -59,6 +64,7 @@ function App() {
           })
           setSavedMovies(movies);
           setIsError(false);
+          localStorage.setItem('savedMovies', JSON.stringify(movies));
         }
       })
       .catch(err => {
@@ -67,6 +73,14 @@ function App() {
       })
       .finally(() => setIsLoading(false))
   }
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    }
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [width])
 
   function handleUpdateUser(name, about) {
     Api.patchUserInfo(name, about, token)
@@ -83,7 +97,7 @@ function App() {
   }
 
   function showResultText() {
-    setText('Данные успешно обновлены');
+    setText('Данные успешно обновлены'); 
     setTimeout(() => setText(''), 2000);
   }
 
@@ -102,6 +116,7 @@ function App() {
           saved: true
         }
         setSavedMovies([newMovie, ...savedMovies]);
+        localStorage.setItem('savedMovies', JSON.stringify([newMovie, ...savedMovies]));
       })
       .catch(err => console.log(err));
   }
@@ -110,7 +125,9 @@ function App() {
     const id = savedMovies.find((movie) => movie.movieId === movieId)?.id || null;
     Api.deleteMovie(id, token)
       .then(() => {
-        setSavedMovies((state) => state.filter((movie) => movie.id === id ? '' : movie));
+        const result = savedMovies.filter((movie) => movie.id === id ? '' : movie);
+        setSavedMovies(result);
+        localStorage.setItem('savedMovies', JSON.stringify(result));
       })
       .catch(err => console.log(err));
   }
@@ -156,6 +173,8 @@ function App() {
     localStorage.setItem('value', '');
     localStorage.setItem('isChecked', JSON.stringify(false));
     localStorage.setItem('movies', JSON.stringify([]));
+    localStorage.setItem('firstMount', JSON.stringify(true));
+    localStorage.setItem('savedMovies', JSON.stringify([]));
   }
 
   function openNavigation() {
@@ -184,6 +203,7 @@ function App() {
             isOpen={isNavigationOpen}
             onOpen={openNavigation}
             onClose={closeNavigation}
+            width={width}
           />} />
           <Route path="/movies" element={<ProtectedRouteElement
             element={Movies}
@@ -194,6 +214,7 @@ function App() {
             isOpen={isNavigationOpen}
             onOpen={openNavigation}
             onClose={closeNavigation}
+            width={width}
           />} />
           <Route path="/saved-movies" element={<ProtectedRouteElement
             element={SavedMovies}
@@ -206,6 +227,7 @@ function App() {
             getSavedMovies={getSavedMovies}
             isLoading={isLoading}
             isError={isError}
+            width={width}
           />} />
           <Route path="/profile" element={<ProtectedRouteElement
             element={Profile}
@@ -220,6 +242,7 @@ function App() {
             onClosePopup={closeEditProfilePopup}
             errorCode={profileErrCode}
             text={text}
+            width={width}
           />} />
           <Route path="/signup" element={<Register onRegister={onRegister} errorCode={registerErrCode} />} />
           <Route path="/signin" element={<Login onLogin={onLogin} errorCode={loginErrCode} />} />

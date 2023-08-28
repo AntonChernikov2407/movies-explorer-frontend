@@ -47,6 +47,7 @@ function Register(props) {
   function handleSubmit(evt) {
     evt.preventDefault();
     props.onRegister(name, email, password);
+    setIsDisabled(true);
   }
 
   return(

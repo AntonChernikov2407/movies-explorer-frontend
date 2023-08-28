@@ -2,18 +2,18 @@ import './NavTab.css';
 
 function NavTab() {
   return (
-    <ul className="navtab">
-      <li className="navtab__link-container">
-        <a href="#about-project" className="link navtab__link" >О проекте</a>
-      </li>
-      <li className="navtab__link-container">
-        <a href="#techs" className="link navtab__link" >Технологии</a>
-      </li>
-      <li className="navtab__link-container">
-        <a href="#about-me" className="link navtab__link" >Студент</a>
-      </li> 
-    </ul>
+    <nav className="navtab">
+      <a className="link navtab__link" href="#about-project">
+        <p className="navtab__link-text" >О проекте</p>
+      </a>
+      <a className="link navtab__link" href="#techs">
+        <p className="navtab__link-text" >Технологии</p>
+      </a>
+      <a className="link navtab__link" href="#about-me">
+        <p className="navtab__link-text" >Студент</p>
+      </a> 
+    </nav>
   );
-}
+} 
 
 export default NavTab;

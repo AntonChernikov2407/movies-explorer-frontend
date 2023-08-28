@@ -14,10 +14,16 @@ function SavedMovies(props) {
   const [isChecked, setIsChecked] = useState(false);
   const [request, setRequest] = useState('');
   const [filteredMovies, setFilteredMovies] = useState([]);
+  const [isFirstMount, setIsFirstMount] = useState(JSON.parse(localStorage.getItem('firstMount')))
   const savedMovies = props.savedMovies;
 
   useEffect(() => {
-    props.getSavedMovies();
+    if (isFirstMount) {
+      props.getSavedMovies();
+      setIsFirstMount(false);
+      localStorage.setItem('firstMount', JSON.stringify(false));
+    } 
+    return;
   }, []);
 
   useEffect(() => {
@@ -51,13 +57,20 @@ function SavedMovies(props) {
         moviesArray={filteredMovies} 
         request={request} 
         onDelete={props.onDelete}
+        width={props.width}
       />)
   }
 
   return (
     <>
       <Navigation isOpen={props.isOpen} onClose={props.onClose} />
-      <Header isOpen={props.isOpen} onOpen={props.onOpen} onClose={props.onClose} loggedIn={props.loggedIn} />
+      <Header
+        isOpen={props.isOpen}
+        onOpen={props.onOpen}
+        onClose={props.onClose}
+        loggedIn={props.loggedIn}
+        width={props.width}
+      />
       <main className="saved-movies">
         <SearchForm onSubmit={handleSubmit} onChange={changeCheckboxState} />
         {returnContent()}

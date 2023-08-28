@@ -19,7 +19,7 @@ const MoviesCard = memo(({
 }) => {
 
   const location = useLocation();
-  const [isSaved, setIsSaved] = useState(saved);
+  // const [isSaved, setIsSaved] = useState(saved);
 
   function transformTime(duration) {
     const minutes = duration % 60;
@@ -35,7 +35,7 @@ const MoviesCard = memo(({
   }
 
   function handleSave() {
-    setIsSaved(true);
+    // setIsSaved(true);
     onSave({
       nameRU,
       nameEN,
@@ -51,13 +51,13 @@ const MoviesCard = memo(({
   }
 
   function handleDelete() {
-    setIsSaved(false);
+    // setIsSaved(false);
     onDelete(movieId);
   }
 
   function returnButton() {
     if (location.pathname === "/movies") {
-      return isSaved 
+      return saved 
         ? (<button className="button movie__button movie__button_saved" onClick={handleDelete} />)
         : (<button className="button movie__save-button" onClick={handleSave}>Сохранить</button>)
     } else {

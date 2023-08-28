@@ -13,7 +13,13 @@ function Main(props) {
   return (
     <>
       <Navigation isOpen={props.isOpen} onClose={props.onClose} />
-      <Header isOpen={props.isOpen} onOpen={props.onOpen} onClose={props.onClose} loggedIn={props.loggedIn} />
+      <Header
+        isOpen={props.isOpen}
+        onOpen={props.onOpen}
+        onClose={props.onClose}
+        loggedIn={props.loggedIn}
+        width={props.width}
+      />
       <main className="main">
         <Promo />
         <AboutProject />

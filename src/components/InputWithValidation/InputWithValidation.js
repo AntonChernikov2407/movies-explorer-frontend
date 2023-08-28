@@ -13,6 +13,19 @@ const InputWithValidation = (props) => {
   function checkValidity(evt) {
     const input = evt.target;
     props.onChange({name: input.name, value: input.value});
+    if (input.name === 'email') {
+      const emailRegex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+      if (!emailRegex.test(input.value)) {
+        setError(true);
+        setErrorText('Неправильный формат email.');
+        props.setInputValidity({name: input.name, value: false});
+      } else {
+        setError(false);
+        setErrorText('');
+        props.setInputValidity({name: input.name, value: true});
+      }
+      return;
+    }
     if (!input.validity.valid) {
       setError(true);
       setErrorText(input.validationMessage);
