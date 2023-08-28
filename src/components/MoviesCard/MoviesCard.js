@@ -1,6 +1,6 @@
 import './MoviesCard.css';
 import { useLocation } from 'react-router-dom';
-import { memo, useState } from 'react';
+import { memo } from 'react';
 
 const MoviesCard = memo(({
   onDelete,
@@ -19,7 +19,6 @@ const MoviesCard = memo(({
 }) => {
 
   const location = useLocation();
-  // const [isSaved, setIsSaved] = useState(saved);
 
   function transformTime(duration) {
     const minutes = duration % 60;
@@ -35,7 +34,6 @@ const MoviesCard = memo(({
   }
 
   function handleSave() {
-    // setIsSaved(true);
     onSave({
       nameRU,
       nameEN,
@@ -51,7 +49,6 @@ const MoviesCard = memo(({
   }
 
   function handleDelete() {
-    // setIsSaved(false);
     onDelete(movieId);
   }
 

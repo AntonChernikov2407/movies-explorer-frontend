@@ -7,7 +7,6 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList.js';
 import Footer from '../Footer/Footer.js';
 import FilterMovies from '../../utils/FilterMovies.js';
 import * as MovieApi from '../../utils/MovieApi.js';
-import * as Api from '../../utils/MainApi.js';
 import { useState, useEffect } from 'react';
 
 function Movies(props) {
