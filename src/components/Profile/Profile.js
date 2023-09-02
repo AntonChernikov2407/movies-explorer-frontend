@@ -2,45 +2,29 @@ import './Profile.css';
 import Navigation from '../Navigation/Navigation.js';
 import Header from '../Header/Header.js';
 import EditProfilePopup from '../EditProfilePopup/EditProfilePopup.js';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext.js';
 
-function Profile() {
+function Profile(props) {
 
-  const currentUser = {
-    name: 'Виталий',
-    email: 'pochta@yandex.ru'
-  }
-
-  const navigate = useNavigate();
-  const [isNavigationOpen, setIsNavigationOpen] = useState(false);
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
-
-  function openNavigation() {
-    setIsNavigationOpen(true);
-  }
-
-  function closeNavigation() {
-    setIsNavigationOpen(false);
-  }
-
-  function openEditProfilePopup() {
-    setIsEditProfilePopupOpen(true);
-  }
-
-  function closeEditProfilePopup() {
-    setIsEditProfilePopupOpen(false);
-  }
-
-  function replaceToMain() {
-    navigate('/', {replace: true});
-  }
+  const currentUser = useContext(CurrentUserContext);
 
   return (
     <>
-      <Navigation isOpen={isNavigationOpen} onClose={closeNavigation} />
-      <Header isOpen={isNavigationOpen} onOpen={openNavigation} onClose={closeNavigation} />
-      <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeEditProfilePopup} />
+      <Navigation isOpen={props.isOpen} onClose={props.onClose} />
+      <Header
+        isOpen={props.isOpen}
+        onOpen={props.onOpen}
+        onClose={props.onClose}
+        loggedIn={props.loggedIn}
+        width={props.width}
+      />
+      <EditProfilePopup
+        isOpen={props.isOpenPopup}
+        onClose={props.onClosePopup}
+        onSubmit={props.onSubmit}
+        errorCode={props.errorCode}
+      />
       <main className="profile">
         <div className="profile__content-wrapper">
           <div className="profile__main-content">
@@ -56,9 +40,10 @@ function Profile() {
               </div>
             </div>
           </div>
+          <p className="profile__text">{props.text}</p>
           <div className="profile__buttons">
-            <button className="button profile__button profile__button_edit-profile" onClick={openEditProfilePopup}>Редактировать</button>
-            <button className="button profile__button profile__button_logout" onClick={replaceToMain}>Выйти из аккаунта</button>
+            <button className="button profile__button profile__button_edit-profile" onClick={props.onOpenPopup}>Редактировать</button>
+            <button className="button profile__button profile__button_logout" onClick={props.onSignOut}>Выйти из аккаунта</button>
           </div>
         </div>
       </main>

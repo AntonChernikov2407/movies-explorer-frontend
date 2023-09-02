@@ -7,7 +7,7 @@
   padding: 0;
 }
 
-.navtab__link-container {
+.navtab__link {
   width: 96px;
   height: 36px;
   border-radius: 10px;
@@ -18,11 +18,12 @@
   align-items: center;
 }
 
-.navtab__link {
+.navtab__link-text {
   color: #FFF;
   font-size: 12px;
   font-weight: 500;
   line-height: 1.33;
+  margin: 0;
 }
 
 @media screen and (max-width: 767px) {
@@ -30,12 +31,12 @@
     width: 258px;
   }
 
-  .navtab__link-container {
+  .navtab__link {
     width: 82px;
     height: 26px;
   }
 
-  .navtab__link {
+  .navtab__link-text {
     font-size: 10px;
     line-height: 1.6;
   }

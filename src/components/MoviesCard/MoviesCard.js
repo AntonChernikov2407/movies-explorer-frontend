@@ -1,10 +1,24 @@
 import './MoviesCard.css';
 import { useLocation } from 'react-router-dom';
+import { memo } from 'react';
 
-function MoviesCard(props) {
+const MoviesCard = memo(({
+  onDelete,
+  onSave,
+  nameRU,
+  nameEN,
+  country,
+  director,
+  duration,
+  year,
+  description,
+  image,
+  trailerLink,
+  movieId,
+  saved
+}) => {
 
   const location = useLocation();
-  const isSaved = true;
 
   function transformTime(duration) {
     const minutes = duration % 60;
@@ -19,21 +33,47 @@ function MoviesCard(props) {
     return `${hours > 0 ? `${hours}ч` : ''} ${checkMinutes(minutes)}`
   }
 
+  function handleSave() {
+    onSave({
+      nameRU,
+      nameEN,
+      country,
+      director,
+      duration,
+      year,
+      description,
+      image,
+      trailerLink,
+      movieId,
+    });
+  }
+
+  function handleDelete() {
+    onDelete(movieId);
+  }
+
+  function returnButton() {
+    if (location.pathname === "/movies") {
+      return saved 
+        ? (<button className="button movie__button movie__button_saved" onClick={handleDelete} />)
+        : (<button className="button movie__save-button" onClick={handleSave}>Сохранить</button>)
+    } else {
+      return(<button className="button movie__button movie__button_remove" onClick={handleDelete} />)
+    }
+  }
+
   return (
     <article className="movie">
-      {isSaved 
-        ? <button className={`button movie__button ${
-            location.pathname === "/movies" ? "movie__button_saved" : "movie__button_remove"
-          }`} />
-        : <button className="button movie__save-button">Сохранить</button>
-      }
-      <img className="movie__image" src={props.image} alt={props.name} />
+      {returnButton()}
+      <a className="movie__trailer-link" href={trailerLink} target="_blank" rel="noreferrer">
+        <img className="movie__image" src={image} alt={nameRU} />
+      </a>
       <div className="movie__description">
-        <p className="movie__name">{props.name}</p>
-        <div className="movie__duration">{transformTime(props.duration)}</div>
+        <p className="movie__name">{nameRU}</p>
+        <div className="movie__duration">{transformTime(duration)}</div>
       </div>
     </article>
   );
-}
+})
 
 export default MoviesCard;

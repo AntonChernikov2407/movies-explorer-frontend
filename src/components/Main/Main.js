@@ -7,24 +7,19 @@ import Techs from '../Techs/Techs.js';
 import AboutMe from '../AboutMe/AboutMe.js';
 import Portfolio from '../Portfolio/Portfolio.js';
 import Footer from '../Footer/Footer.js';
-import { useState } from 'react';
 
-function Main() {
-
-  const [isNavigationOpen, setIsNavigationOpen] = useState(false);
-
-  function openNavigation() {
-    setIsNavigationOpen(true);
-  }
-
-  function closeNavigation() {
-    setIsNavigationOpen(false);
-  }
+function Main(props) {
 
   return (
     <>
-      <Navigation isOpen={isNavigationOpen} onClose={closeNavigation} />
-      <Header isOpen={isNavigationOpen} onOpen={openNavigation} onClose={closeNavigation} />
+      <Navigation isOpen={props.isOpen} onClose={props.onClose} />
+      <Header
+        isOpen={props.isOpen}
+        onOpen={props.onOpen}
+        onClose={props.onClose}
+        loggedIn={props.loggedIn}
+        width={props.width}
+      />
       <main className="main">
         <Promo />
         <AboutProject />
