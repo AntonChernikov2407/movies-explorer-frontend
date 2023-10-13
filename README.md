@@ -1,6 +1,5 @@
 # Проект Movies Explorer фронтэнд
 
-
 Фронтенд проекта Movies Explorer. Реализованы такие возможности как:
 - Регистрация/Авторизация
 - Сохранение и удаление фильмов в избранное
@@ -9,8 +8,11 @@
 1. HTML
 2. CSS
 3. React
+4. Node.js
 
-Макет проекта: dark-2
-Ссылка на репозиторий на GitHub Pages: https://antonchernikov2407.github.io/movies-explorer-frontend
-Ссылка на PullRequest: https://github.com/AntonChernikov2407/movies-explorer-frontend/pull/2
-Ссылка на готовый проект https://movie-explorer.chernikov.nomoreparties.sbs
+
+### Инструкция по развертыванию:
+1. Запустить [backend](https://github.com/AntonChernikov2407/movies-explorer-api)
+2. Скопировать репозиторий `git clone git@github.com:AntonChernikov2407/movies-explorer-frontend.git`
+3. Перейти в директорию проекта и установить зависимости `npm i`
+4. Запустить проект `npm start`
